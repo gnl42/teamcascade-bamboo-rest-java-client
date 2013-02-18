@@ -17,7 +17,7 @@
 * limitations under the License.
 */
 
-package org.teamcascade.java.bamboo.rest.client;
+package org.teamcascade.java.bamboo.rest.client.internal;
 
 public class ServerVersionConstants {
     // TODO: check if any similar constants exists for Bamboo servers
