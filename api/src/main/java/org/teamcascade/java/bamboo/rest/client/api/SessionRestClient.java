@@ -17,35 +17,22 @@
 * limitations under the License.
 */
 
+
 package org.teamcascade.java.bamboo.rest.client.api;
 
+import org.teamcascade.java.bamboo.rest.client.api.domain.Session;
 import com.atlassian.util.concurrent.Promise;
-import org.teamcascade.java.bamboo.rest.client.api.domain.util.ServerInfo;
-
-import java.lang.reflect.Field;
 
 /**
- * Serves information about Bamboo metadata like server information
- * This data constitutes a data dictionary which then Bamboo builds base on.
+ * Client handling the current user session
  *
  * @since v0.1
  */
-public interface MetadataRestClient {
+public interface SessionRestClient {
 
 	/**
-	 * Retrieves information about this JIRA instance
-	 *
-	 * @return information about this JIRA instance
+	 * @return information about current session
 	 * @throws RestClientException in case of problems (connectivity, malformed messages, etc.)
 	 */
-
-	Promise<ServerInfo> getServerInfo();
-
-	/**
-	 * Retrieves information about JIRA custom and system fields.
-	 *
-	 * @return information about JIRA custom and system fields.
-	 * @throws RestClientException in case of problems (connectivity, malformed messages, etc.)
-	 */
-	Promise<Iterable<Field>> getFields();
+	Promise<Session> getCurrentSession() throws RestClientException;
 }

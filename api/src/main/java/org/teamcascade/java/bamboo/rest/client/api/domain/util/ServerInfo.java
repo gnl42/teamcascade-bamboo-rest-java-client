@@ -17,7 +17,7 @@
 * limitations under the License.
 */
 
-package org.teamcascade.java.bamboo.rest.client.api.domain;
+package org.teamcascade.java.bamboo.rest.client.api.domain.util;
 
 import com.google.common.base.Objects;
 import org.joda.time.DateTime;
