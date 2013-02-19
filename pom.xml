@@ -10,7 +10,7 @@
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Bamboo REST Java Client</name>
-    <description>Java Library to access more easily Bamboo REST API</description>
+    <description>Java Library to access more easily the Bamboo REST API</description>
     <url>https://bitbucket.org/teamcascade/BRJC</url>
 
     <organization>
@@ -65,9 +65,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jira.version>5.2</jira.version>
-        <jira.data.version>${jira.version}</jira.data.version>
-        <jira.test-lib.version>${jira.version}</jira.test-lib.version>
+        <bamboo.version>5.2</bamboo.version>
+        <bamboo.data.version>${bamboo.version}</bamboo.data.version>
+        <bamboo.test-lib.version>${bamboo.data.version}</bamboo.test-lib.version>
         <remotable.plugins.version>0.6.0</remotable.plugins.version>
         <jdkLevel>1.6</jdkLevel>
         <jersey.client.version>1.5</jersey.client.version>
@@ -189,6 +189,22 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.2</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                        <compilerArgument></compilerArgument>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
     <reporting>
         <plugins>
