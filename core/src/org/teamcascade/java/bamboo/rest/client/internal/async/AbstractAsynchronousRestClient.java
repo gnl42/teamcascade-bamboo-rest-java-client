@@ -32,6 +32,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.teamcascade.java.bamboo.rest.client.internal.json.JsonObjectParser;
 import org.teamcascade.java.bamboo.rest.client.internal.json.JsonParser;
+import org.teamcascade.java.bamboo.rest.client.internal.json.gen.JsonGenerator;
 
 import javax.annotation.Nullable;
 import java.io.ByteArrayInputStream;
