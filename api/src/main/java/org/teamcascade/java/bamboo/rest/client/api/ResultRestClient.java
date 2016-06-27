@@ -17,39 +17,24 @@
 * limitations under the License.
 */
 
-
 package org.teamcascade.java.bamboo.rest.client.api;
 
+import com.atlassian.util.concurrent.Promise;
+import org.teamcascade.java.bamboo.rest.client.api.domain.BasicProject;
+import org.teamcascade.java.bamboo.rest.client.api.domain.Project;
+import org.teamcascade.java.bamboo.rest.client.api.domain.Results;
 
+import java.net.URI;
 
 /**
- * Main access point to Bamboo REST API .
- * As there are many types resources exposed by Bamboo REST API, various resources are grouped into clusters
- * and then handled by different specialized *RestClient classes.
+ * The REST API handling bamboo project resources.
  *
  * @since v0.1
  */
+public interface ResultRestClient {
 
-public interface BambooRestClient {
+	Promise<Results> getResults(String key);
 
-    /**
-     * @return the API handling project metadata
-     */
-    ProjectRestClient getProjectClient();
-
-    ResultRestClient getResultClient();
-
-
-    /**
-     * @return the API handling basic meta-data (data dictionaries defined in Bamboo - like artifacts,vserions,etc)
-     */
-    MetadataRestClient getMetadataClient();
-
-    /**
-     * Destroys this instance of Bamboo Rest Client.
-     *
-     * @throws Exception
-     */
-    void destroy() throws Exception;
+	Promise<Results> getResults(String key, String filterByLabel);
 
 }

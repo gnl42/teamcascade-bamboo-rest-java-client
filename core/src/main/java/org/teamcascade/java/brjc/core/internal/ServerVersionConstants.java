@@ -17,27 +17,12 @@
 * limitations under the License.
 */
 
-package org.teamcascade.java.bamboo.rest.client.api;
+package org.teamcascade.java.bamboo.rest.client.internal;
 
-import com.atlassian.util.concurrent.Promise;
-import org.teamcascade.java.bamboo.rest.client.api.domain.util.ServerInfo;
-
-import java.lang.reflect.Field;
-
-/**
- * Serves information about Bamboo metadata like server information
- * This data constitutes a data dictionary which then Bamboo builds base on.
- *
- * @since v0.1
- */
-public interface MetadataRestClient {
-
-	/**
-	 * Retrieves information about this JIRA instance
-	 *
-	 * @return information about this JIRA instance
-	 * @throws RestClientException in case of problems (connectivity, malformed messages, etc.)
-	 */
-
-	Promise<ServerInfo> getServerInfo();
+public class ServerVersionConstants {
+    // TODO: check if any similar constants exists for Bamboo servers
+	public static final int BN_JIRA_4_3 = 600;
+	public static final int BN_JIRA_4_4 = 640;
+	public static final int BN_JIRA_5 = 700;
+	public static final int BN_JIRA_6 = 6000;
 }

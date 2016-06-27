@@ -17,27 +17,20 @@
 * limitations under the License.
 */
 
-package org.teamcascade.java.bamboo.rest.client.api;
+package org.teamcascade.java.brjc.core.internal.json;
 
-import com.atlassian.util.concurrent.Promise;
-import org.teamcascade.java.bamboo.rest.client.api.domain.util.ServerInfo;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.teamcascade.java.bamboo.rest.client.api.domain.BasicProject;
 
-import java.lang.reflect.Field;
+import java.net.URI;
 
-/**
- * Serves information about Bamboo metadata like server information
- * This data constitutes a data dictionary which then Bamboo builds base on.
- *
- * @since v0.1
- */
-public interface MetadataRestClient {
-
-	/**
-	 * Retrieves information about this JIRA instance
-	 *
-	 * @return information about this JIRA instance
-	 * @throws RestClientException in case of problems (connectivity, malformed messages, etc.)
-	 */
-
-	Promise<ServerInfo> getServerInfo();
+public class BasicProjectJsonParser implements JsonObjectParser<BasicProject> {
+	@Override
+	public BasicProject parse(JSONObject json) throws JSONException {
+		final URI selfUri = JsonParseUtil.parseURI(json.getJSONObject("link").getString("href"));
+		final String key = json.getString("key");
+		final String name = JsonParseUtil.getOptionalString(json, "name");
+		return new BasicProject(selfUri, key, name);
+	}
 }

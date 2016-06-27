@@ -83,8 +83,6 @@
     <modules>
         <module>api</module>
         <module>core</module>
-        <module>plugin</module>
-        <module>test</module>
     </modules>
 
     <!-- Repositories -->

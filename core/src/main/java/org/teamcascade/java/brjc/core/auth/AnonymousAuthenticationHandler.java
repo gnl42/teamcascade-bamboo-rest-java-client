@@ -17,27 +17,21 @@
 * limitations under the License.
 */
 
-package org.teamcascade.java.bamboo.rest.client.api;
 
-import com.atlassian.util.concurrent.Promise;
-import org.teamcascade.java.bamboo.rest.client.api.domain.util.ServerInfo;
+package org.teamcascade.java.brjc.core.auth;
 
-import java.lang.reflect.Field;
+import com.atlassian.httpclient.api.Request;
+import org.teamcascade.java.bamboo.rest.client.api.AuthenticationHandler;
 
 /**
- * Serves information about Bamboo metadata like server information
- * This data constitutes a data dictionary which then Bamboo builds base on.
+ * Anonymous handler - no credentials passed to the server. Only anonymously accessible operations will be possible.
  *
  * @since v0.1
  */
-public interface MetadataRestClient {
+public class AnonymousAuthenticationHandler implements AuthenticationHandler {
 
-	/**
-	 * Retrieves information about this JIRA instance
-	 *
-	 * @return information about this JIRA instance
-	 * @throws RestClientException in case of problems (connectivity, malformed messages, etc.)
-	 */
+	@Override
+	public void configure(Request request) {
+	}
 
-	Promise<ServerInfo> getServerInfo();
 }

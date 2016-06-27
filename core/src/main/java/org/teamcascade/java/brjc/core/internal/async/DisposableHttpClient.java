@@ -17,27 +17,15 @@
 * limitations under the License.
 */
 
-package org.teamcascade.java.bamboo.rest.client.api;
+package org.teamcascade.java.brjc.core.internal.async;
 
-import com.atlassian.util.concurrent.Promise;
-import org.teamcascade.java.bamboo.rest.client.api.domain.util.ServerInfo;
-
-import java.lang.reflect.Field;
+import com.atlassian.httpclient.api.HttpClient;
 
 /**
- * Serves information about Bamboo metadata like server information
- * This data constitutes a data dictionary which then Bamboo builds base on.
- *
- * @since v0.1
+ * Atlassian HttpClient with destroy exposed.
  */
-public interface MetadataRestClient {
+public interface DisposableHttpClient extends HttpClient {
 
-	/**
-	 * Retrieves information about this JIRA instance
-	 *
-	 * @return information about this JIRA instance
-	 * @throws RestClientException in case of problems (connectivity, malformed messages, etc.)
-	 */
+	void destroy() throws Exception;
 
-	Promise<ServerInfo> getServerInfo();
 }
