@@ -22,9 +22,12 @@ package org.teamcascade.java.brjc.core.internal.async;
 import com.atlassian.httpclient.api.HttpClient;
 import com.atlassian.util.concurrent.Promise;
 import org.teamcascade.java.bamboo.rest.client.api.ResultRestClient;
+import org.teamcascade.java.bamboo.rest.client.api.domain.Range;
 import org.teamcascade.java.bamboo.rest.client.api.domain.Results;
 import org.teamcascade.java.brjc.core.internal.json.ResultsJsonParser;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 
@@ -35,30 +38,48 @@ import java.net.URI;
  */
 public class AsynchronousResultRestClient extends AbstractAsynchronousRestClient implements ResultRestClient {
 
-	private static final String RESULT_URI_PREFIX = "result";
-	private final ResultsJsonParser resultsJsonParser = new ResultsJsonParser();
+    private static final String RESULT_URI_PREFIX = "result";
+    private final ResultsJsonParser resultsJsonParser = new ResultsJsonParser();
 
-	private final URI baseUri;
+    private final URI baseUri;
 
-	public AsynchronousResultRestClient(final URI baseUri, final HttpClient client) {
-		super(client);
-		this.baseUri = baseUri;
-	}
+    public AsynchronousResultRestClient(final URI baseUri, final HttpClient client) {
+        super(client);
+        this.baseUri = baseUri;
+    }
 
-	@Override
-	public Promise<Results> getResults(final String key) {
-		final URI uri = UriBuilder.fromUri(baseUri).path(RESULT_URI_PREFIX).path(key).build();
-		return getAndParse(uri, resultsJsonParser);
-	}
+    @Override
+    public Promise<Results> getResults(@Nonnull final String key) {
+        return getResults(key, null, null);
+    }
 
-	@Override
-	public Promise<Results> getResults(String key, String filterByLabel) {
-		final URI uri = UriBuilder
-				.fromUri(baseUri)
-				.path(RESULT_URI_PREFIX)
-				.path(key)
-				.queryParam("label", filterByLabel)
-				.build();
-		return getAndParse(uri, resultsJsonParser);
-	}
+    @Override
+    public Promise<Results> getResults(@Nonnull String key, @Nullable String filterByLabel) {
+        return getResults(key, filterByLabel, null);
+    }
+
+    @Override
+    public Promise<Results> getResults(@Nonnull String key, @Nullable String filterByLabel, @Nullable Range range) {
+        final URI uri = getUri(key, filterByLabel, range);
+        return getAndParse(uri, resultsJsonParser);
+    }
+
+    URI getUri(@Nonnull String key, @Nullable String filterByLabel, @Nullable Range range) {
+        int maxResults = 25;
+        String resultsRange = "";
+        if (range != null) {
+            maxResults = range.getEnd() + 1;
+            resultsRange = String.format("[%d:%d]", range.getStart(), range.getEnd());
+        }
+        UriBuilder builder = UriBuilder
+                .fromUri(baseUri)
+                .path(RESULT_URI_PREFIX)
+                .path(key)
+                .queryParam("max-results", "{a}")
+                .queryParam("expand", "results{b}.result");
+        if (filterByLabel != null) {
+            builder = builder.queryParam("label", filterByLabel);
+        }
+        return builder.build(maxResults, resultsRange);
+    }
 }

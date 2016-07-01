@@ -18,14 +18,11 @@ package org.teamcascade.java.brjc.core.internal.json;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.teamcascade.java.bamboo.rest.client.api.domain.Result;
-import org.teamcascade.java.bamboo.rest.client.api.domain.Results;
 
 public class ResultJsonParser implements JsonObjectParser<Result> {
 
-	@Override
-	public Result parse(JSONObject json) throws JSONException {
-		return new Result(json.getString("key"), json.getString("state"));
- 	}
-
-
+    @Override
+    public Result parse(JSONObject json) throws JSONException {
+        return new Result(json.getString("key"), json.getString("state"), json.getString("buildStartedTime"));
+    }
 }

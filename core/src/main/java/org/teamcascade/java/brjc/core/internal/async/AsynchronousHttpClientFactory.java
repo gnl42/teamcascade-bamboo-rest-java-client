@@ -117,12 +117,12 @@ public class AsynchronousHttpClientFactory {
 
 		@Override
 		public String getDisplayName() {
-			return "Atlassian JIRA Rest Java Client";
+			return "Bamboo Rest Java Client";
 		}
 
 		@Override
 		public String getVersion() {
-			return MavenUtils.getVersion("com.atlassian.jira", "jira-rest-java-com.atlassian.jira.rest.client");
+			return "1.0";
 		}
 
 		@Override

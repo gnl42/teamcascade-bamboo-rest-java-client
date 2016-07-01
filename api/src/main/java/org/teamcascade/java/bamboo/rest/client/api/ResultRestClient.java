@@ -20,11 +20,11 @@
 package org.teamcascade.java.bamboo.rest.client.api;
 
 import com.atlassian.util.concurrent.Promise;
-import org.teamcascade.java.bamboo.rest.client.api.domain.BasicProject;
-import org.teamcascade.java.bamboo.rest.client.api.domain.Project;
+import org.teamcascade.java.bamboo.rest.client.api.domain.Range;
 import org.teamcascade.java.bamboo.rest.client.api.domain.Results;
 
-import java.net.URI;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * The REST API handling bamboo project resources.
@@ -33,8 +33,10 @@ import java.net.URI;
  */
 public interface ResultRestClient {
 
-	Promise<Results> getResults(String key);
+	Promise<Results> getResults(@Nonnull String key);
 
-	Promise<Results> getResults(String key, String filterByLabel);
+	Promise<Results> getResults(@Nonnull String key, @Nullable String filterByLabel);
+
+	Promise<Results> getResults(@Nonnull String key, @Nullable String filterByLabel, @Nullable Range range);
 
 }

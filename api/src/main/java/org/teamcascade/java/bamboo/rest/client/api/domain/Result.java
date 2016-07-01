@@ -1,17 +1,14 @@
 package org.teamcascade.java.bamboo.rest.client.api.domain;
 
-/**
- * TODO: Document this class / interface here
- *
- * @since v7.0
- */
 public class Result {
     private final String key;
     private final String state;
+    private final String buildStartedTime;
 
-    public Result(String key, String state) {
+    public Result(String key, String state, String buildStartedTime) {
         this.key = key;
         this.state = state;
+        this.buildStartedTime = buildStartedTime;
     }
 
     public String getKey() {
@@ -20,6 +17,10 @@ public class Result {
 
     public String getState() {
         return state;
+    }
+
+    public String getBuildStartedTime() {
+        return buildStartedTime;
     }
 
     @Override
