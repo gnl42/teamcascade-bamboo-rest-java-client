@@ -21,6 +21,7 @@
 package org.teamcascade.java.bamboo.rest.client.api;
 
 import com.atlassian.httpclient.api.HttpClient;
+import com.atlassian.httpclient.api.factory.HttpClientOptions;
 
 import java.net.URI;
 
@@ -40,6 +41,14 @@ public interface BambooRestClientFactory {
 	BambooRestClient create(final URI serverUri, final AuthenticationHandler authenticationHandler);
 
 	/**
+	 * Creates an instance of BambooRestClient with default HttpClient settings.
+	 *
+	 * @param serverUri             - URI of Bamboo instance.
+	 * @param authenticationHandler - requests authenticator.
+	 */
+	BambooRestClient create(final URI serverUri, final AuthenticationHandler authenticationHandler, final HttpClientOptions httpClientOptions);
+
+	/**
 	 * Creates an instance of BambooRestClient with default HttpClient settings. HttpClient will conduct a
 	 * basic authentication for given credentials.
 	 *
@@ -48,6 +57,16 @@ public interface BambooRestClientFactory {
 	 * @param password  - password of the user used to log in to Bamboo.
 	 */
 	BambooRestClient createWithBasicHttpAuthentication(final URI serverUri, final String username, final String password);
+
+	/**
+	 * Creates an instance of BambooRestClient with default HttpClient settings. HttpClient will conduct a
+	 * basic authentication for given credentials.
+	 *
+	 * @param serverUri - URI or Bamboo instance.
+	 * @param username  - username of the user used to log in to Bamboo.
+	 * @param password  - password of the user used to log in to Bamboo.
+	 */
+	BambooRestClient createWithBasicHttpAuthentication(final URI serverUri, final String username, final String password, final HttpClientOptions httpClientOptions);
 
 	/**
 	 * Creates an instance of BambooRestClient with given Atlassian HttpClient.

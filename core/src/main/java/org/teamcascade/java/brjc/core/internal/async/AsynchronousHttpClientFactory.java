@@ -37,6 +37,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.Date;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Factory for asynchronous http clients.
@@ -47,23 +48,7 @@ public class AsynchronousHttpClientFactory {
 
 	@SuppressWarnings("unchecked")
 	public DisposableHttpClient createClient(final URI serverUri, final AuthenticationHandler authenticationHandler) {
-		final HttpClientOptions options = new HttpClientOptions();
-		options.setRequestPreparer(new Effect<Request>() {
-			@Override
-			public void apply(final Request request) {
-				authenticationHandler.configure(request);
-			}
-		});
-		final DefaultHttpClient defaultHttpClient = new DefaultHttpClient(new NoOpEventPublisher(),
-				new RestClientApplicationProperties(serverUri),
-				ThreadLocalContextManagers.noop(), options);
-		return new AtlassianHttpClientDecorator(defaultHttpClient) {
-
-			@Override
-			public void destroy() throws Exception {
-				defaultHttpClient.destroy();
-			}
-		};
+		return createClient(serverUri, authenticationHandler, new HttpClientOptions());
 	}
 
 	public DisposableHttpClient createClient(final HttpClient client) {
@@ -76,6 +61,26 @@ public class AsynchronousHttpClientFactory {
 				// Destroy method should never be called for AtlassianHttpClient coming from
 				// a client! Imagine you create a RestClient, pass your own HttpClient there
 				// and it gets destroy.
+			}
+		};
+	}
+
+	public DisposableHttpClient createClient(final URI serverUri, final AuthenticationHandler authenticationHandler,
+											 final HttpClientOptions httpClientOptions) {
+		httpClientOptions.setRequestPreparer(new Effect<Request>() {
+			@Override
+			public void apply(final Request request) {
+				authenticationHandler.configure(request);
+			}
+		});
+		final DefaultHttpClient defaultHttpClient = new DefaultHttpClient(new NoOpEventPublisher(),
+				new RestClientApplicationProperties(serverUri),
+				ThreadLocalContextManagers.noop(), httpClientOptions);
+		return new AtlassianHttpClientDecorator(defaultHttpClient) {
+
+			@Override
+			public void destroy() throws Exception {
+				defaultHttpClient.destroy();
 			}
 		};
 	}

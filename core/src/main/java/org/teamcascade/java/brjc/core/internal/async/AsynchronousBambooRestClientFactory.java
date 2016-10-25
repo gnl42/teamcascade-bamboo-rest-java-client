@@ -20,6 +20,7 @@
 package org.teamcascade.java.brjc.core.internal.async;
 
 import com.atlassian.httpclient.api.HttpClient;
+import com.atlassian.httpclient.api.factory.HttpClientOptions;
 import org.teamcascade.java.brjc.core.auth.BasicHttpAuthenticationHandler;
 import org.teamcascade.java.bamboo.rest.client.api.AuthenticationHandler;
 import org.teamcascade.java.bamboo.rest.client.api.BambooRestClient;
@@ -36,14 +37,24 @@ public class AsynchronousBambooRestClientFactory implements BambooRestClientFact
 
 	@Override
 	public BambooRestClient create(final URI serverUri, final AuthenticationHandler authenticationHandler) {
+		return create(serverUri, authenticationHandler, new HttpClientOptions());
+	}
+
+	@Override
+	public BambooRestClient create(final URI serverUri, final AuthenticationHandler authenticationHandler, final HttpClientOptions httpClientOptions) {
 		final DisposableHttpClient httpClient = new AsynchronousHttpClientFactory()
-				.createClient(serverUri, authenticationHandler);
+				.createClient(serverUri, authenticationHandler, httpClientOptions);
 		return new AsynchronousBambooRestClient(serverUri, httpClient);
 	}
 
 	@Override
 	public BambooRestClient createWithBasicHttpAuthentication(final URI serverUri, final String username, final String password) {
-		return create(serverUri, new BasicHttpAuthenticationHandler(username, password));
+		return createWithBasicHttpAuthentication(serverUri, username, password, new HttpClientOptions());
+	}
+
+	@Override
+	public BambooRestClient createWithBasicHttpAuthentication(final URI serverUri, final String username, final String password, final HttpClientOptions httpClientOptions) {
+		return create(serverUri, new BasicHttpAuthenticationHandler(username, password), httpClientOptions);
 	}
 
 	@Override
