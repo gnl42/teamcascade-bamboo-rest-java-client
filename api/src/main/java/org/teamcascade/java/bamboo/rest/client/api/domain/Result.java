@@ -4,11 +4,15 @@ public class Result {
     private final String key;
     private final String state;
     private final String buildStartedTime;
+    private final String buildCompletedTime;
+    private final String buildDurationInSeconds;
 
-    public Result(String key, String state, String buildStartedTime) {
+    public Result(String key, String state, String buildStartedTime, String buildCompletedTime, String buildDurationInSeconds) {
         this.key = key;
         this.state = state;
         this.buildStartedTime = buildStartedTime;
+        this.buildCompletedTime = buildCompletedTime;
+        this.buildDurationInSeconds = buildDurationInSeconds;
     }
 
     public String getKey() {
@@ -21,6 +25,14 @@ public class Result {
 
     public String getBuildStartedTime() {
         return buildStartedTime;
+    }
+
+    public String getBuildCompletedTime() {
+        return buildCompletedTime;
+    }
+
+    public String getBuildDurationInSeconds() {
+        return buildDurationInSeconds;
     }
 
     @Override

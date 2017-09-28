@@ -23,6 +23,12 @@ public class ResultJsonParser implements JsonObjectParser<Result> {
 
     @Override
     public Result parse(JSONObject json) throws JSONException {
-        return new Result(json.getString("key"), json.getString("state"), json.getString("buildStartedTime"));
+        return new Result(
+                json.getString("key"),
+                json.getString("state"),
+                json.getString("buildStartedTime"),
+                json.getString("buildCompletedTime"),
+                json.getString("buildDurationInSeconds")
+        );
     }
 }
