@@ -95,28 +95,28 @@
             </snapshots>
             <id>central</id>
             <name>teamcascade-release</name>
-            <url>http://artifactory.teamcascade.org/artifactory/teamcascade-release</url>
+            <url>https://artifactory.teamcascade.org/artifactory/teamcascade-release</url>
         </repository>
         <repository>
             <snapshots />
             <id>snapshots</id>
             <name>teamcascade-snapshots</name>
-            <url>http://artifactory.teamcascade.org/artifactory/teamcascade-snapshots</url>
+            <url>https://artifactory.teamcascade.org/artifactory/teamcascade-snapshots</url>
         </repository>
         <repository>
             <id>teamcascade.org-release</id>
             <name>artifactory.teamcascade.org-releases</name>
-            <url>http://artifactory.teamcascade.org/artifactory/ext-release-local</url>
+            <url>https://artifactory.teamcascade.org/artifactory/ext-release-local</url>
         </repository>
         <repository>
             <id>teamcascade.org-maven</id>
             <name>artifactory.teamcascade.org-releases</name>
-            <url>http://artifactory.teamcascade.org/artifactory/maven-repos</url>
+            <url>https://artifactory.teamcascade.org/artifactory/maven-repos</url>
         </repository>
         <!-- External -->
         <repository>
             <id>codehaus-snapshots</id>
-            <url>http://snapshots.repository.codehaus.org</url>
+            <url>https://snapshots.repository.codehaus.org</url>
         </repository>
         <repository>
             <id>atlassian-public</id>
